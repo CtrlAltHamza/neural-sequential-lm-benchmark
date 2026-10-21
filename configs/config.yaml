@@ -1,0 +1,61 @@
+# Configuration file for Assignment 2 - Next Word Prediction (DLP CS4045)
+# Student: Hamza Khurram (i210735)
+
+project:
+  name: "DLP_Assignment_02_RNN_LSTM"
+  author: "Hamza Khurram"
+  roll_no: "i210735"
+  seed: 42
+
+paths:
+  raw_austen: "data/raw/austen/austen.txt"
+  raw_shakespeare: "data/raw/shakespeare"
+  raw_bbc: "data/raw/bbc"
+  processed_dir: "data/processed"
+  models_dir: "saved_models"
+  experiments_dir: "experiments"
+  reports_dir: "reports"
+
+data:
+  min_count: 3
+  train_split: 0.80
+  val_split: 0.10
+  test_split: 0.10
+  default_k: 20
+
+phase2_vanishing_gradient:
+  k_values: [5, 10, 20, 40, 80]
+  embedding_dim: 128
+  hidden_dim: 256
+  num_layers: 1
+  dropout: 0.0
+  lr: 0.001
+  batch_size: 128
+  epochs: 8
+  patience: 2
+
+phase3_hyperparameter_search:
+  default_k: 20
+  # At least 9 experiments (at least 2 Simple RNNs, rest LSTMs)
+  experiments:
+    - { id: "RNN_L1_H128_D0.0",  arch: "rnn",  layers: 1, hidden: 128, dropout: 0.0 }
+    - { id: "RNN_L2_H256_D0.2",  arch: "rnn",  layers: 2, hidden: 256, dropout: 0.2 }
+    - { id: "LSTM_L1_H128_D0.0", arch: "lstm", layers: 1, hidden: 128, dropout: 0.0 }
+    - { id: "LSTM_L1_H256_D0.0", arch: "lstm", layers: 1, hidden: 256, dropout: 0.0 }
+    - { id: "LSTM_L1_H512_D0.2", arch: "lstm", layers: 1, hidden: 512, dropout: 0.2 }
+    - { id: "LSTM_L2_H256_D0.0", arch: "lstm", layers: 2, hidden: 256, dropout: 0.0 }
+    - { id: "LSTM_L2_H256_D0.2", arch: "lstm", layers: 2, hidden: 256, dropout: 0.2 }
+    - { id: "LSTM_L2_H512_D0.5", arch: "lstm", layers: 2, hidden: 512, dropout: 0.5 }
+    - { id: "LSTM_L3_H256_D0.2", arch: "lstm", layers: 3, hidden: 256, dropout: 0.2 }
+  lr: 0.001
+  batch_size: 128
+  epochs: 10
+  patience: 2
+
+phase4_chatbot:
+  max_generate_words: 50
+  temperatures: [0.5, 0.7, 1.0, 1.5]
+
+phase5_confidence_analysis:
+  rare_word_threshold: 50
+  regression_train_split: 0.70
