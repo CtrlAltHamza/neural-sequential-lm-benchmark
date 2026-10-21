@@ -26,6 +26,7 @@ def package_submission(zip_filename="i210735_Hamza_Khurram_A2.zip"):
     include_paths = [
         "README.txt",
         "README.md",
+        "report.pdf",
         "requirements.txt",
         "main.py",
         "configs",
