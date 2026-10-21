@@ -5,8 +5,8 @@
     "layers": 1,
     "hidden": 512,
     "dropout": 0.2,
-    "val_ppl": 4.76,
-    "test_ppl": 4.92
+    "val_ppl": 135.17,
+    "test_ppl": 134.25
   },
   "best_rnn": {
     "id": "RNN_L2_H256_D0.2",
@@ -14,9 +14,9 @@
     "layers": 2,
     "hidden": 256,
     "dropout": 0.2,
-    "val_ppl": 5.2,
-    "test_ppl": 5.38
+    "val_ppl": 144.02,
+    "test_ppl": 142.25
   },
-  "dataset_samples": 100000,
-  "trained_at": "2026-10-22 00:39:07"
+  "dataset_samples": 80000,
+  "trained_at": "2026-10-22 01:19:20"
 }

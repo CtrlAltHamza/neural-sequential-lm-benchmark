@@ -50,10 +50,10 @@ def train_full_datasets(
 
     print(f"  -> Train: {len(train_y):,} | Val: {len(val_y):,} | Test: {len(test_y):,} samples (k={k}, Vocab={vocab_size:,})")
 
-    # Limit train samples to 100,000 for balanced high accuracy & CPU speed (~60s per epoch)
-    train_limit = 100000
-    val_limit = 20000
-    test_limit = 20000
+    # Train samples set to 80,000 for high accuracy and fast CPU training
+    train_limit = 80000
+    val_limit = 10000
+    test_limit = 10000
 
     train_ds = TensorDataset(train_X[:train_limit], train_y[:train_limit])
     val_ds = TensorDataset(val_X[:val_limit], val_y[:val_limit])

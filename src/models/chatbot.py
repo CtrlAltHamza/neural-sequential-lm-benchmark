@@ -65,10 +65,10 @@ class NextWordChatbot:
         self.model.eval()
         raw_words = self.tokenizer.tokenize_text(seed_phrase)
         if not raw_words:
-            raw_words = ["<s>"]
+            current_tokens = ["<s>"]
+        else:
+            current_tokens = ["<s>"] + list(raw_words)
 
-        # Current context list
-        current_tokens = list(raw_words)
         generated_words = []
 
         with torch.no_grad():

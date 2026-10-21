@@ -52,10 +52,9 @@ def clean_austen_text(raw_filepath="data/raw/austen/austen.txt", output_filepath
             removed_count += 1
             continue
 
-        # Replace non-standard characters like replacement chars () or smart quotes
+        # Replace non-standard characters like smart quotes and dashes
         line_normalized = (
             line_clean
-            .replace("", "'")
             .replace("“", '"')
             .replace("”", '"')
             .replace("‘", "'")

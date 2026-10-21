@@ -10,7 +10,13 @@ Serializes:
 
 import time
 import json
+import sys
 from pathlib import Path
+
+root_dir = Path(__file__).resolve().parent.parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
+
 import joblib
 import torch
 import numpy as np
@@ -32,26 +38,13 @@ def serialize_all_preprocessed_data(
 
     t0 = time.time()
     # 1. Load Corpus
-    tokenizer_path = out_path / "vocab.json"
-    if not tokenizer_path.exists():
-        print("[DATA] Preparing and splitting corpus...")
-        manager = CorpusManager(seed=42, min_count=3)
-        stats = manager.prepare_and_split_corpus()
-        tokenizer = manager.tokenizer
-        train_sents = manager.train_sentences
-        val_sents = manager.val_sentences
-        test_sents = manager.test_sentences
-    else:
-        print("[DATA] Loading existing corpus splits and tokenizer...")
-        tokenizer = Tokenizer.load(str(tokenizer_path))
-        with open(out_path / "train_sentences.json", "r", encoding="utf-8") as f:
-            train_sents = json.load(f)
-        with open(out_path / "val_sentences.json", "r", encoding="utf-8") as f:
-            val_sents = json.load(f)
-        with open(out_path / "test_sentences.json", "r", encoding="utf-8") as f:
-            test_sents = json.load(f)
-        with open(out_path / "corpus_stats.json", "r", encoding="utf-8") as f:
-            stats = json.load(f)
+    print("[DATA] Preparing and splitting corpus freshly from cleaned text...")
+    manager = CorpusManager(seed=42, min_count=3)
+    stats = manager.prepare_and_split_corpus()
+    tokenizer = manager.tokenizer
+    train_sents = manager.train_sentences
+    val_sents = manager.val_sentences
+    test_sents = manager.test_sentences
 
     # 2. Save full preprocessed corpus bundle
     corpus_bundle = {
