@@ -66,9 +66,59 @@ This repository presents an experimental and research-oriented comparative analy
 │   └── Assignment_02_Hamza_Khurram_i210735.ipynb
 ├── experiments/
 ├── saved_models/
+│   ├── best_lstm.joblib
+│   └── best_rnn.joblib
 └── reports/
     ├── figures/
     └── report.pdf
+```
+
+---
+
+## 📦 Pretrained Models & Serialized Preprocessed Datasets (`.joblib`)
+
+For instant inference, reproduction, and CV evaluation without re-running hours of training, the repository provides fully trained model weights and preprocessed datasets serialized using `joblib`:
+
+| Artifact File | Format | Size | Description |
+| :--- | :--- | :--- | :--- |
+| `data/processed/preprocessed_corpus.joblib` | Joblib | 3.89 MB | Full Tokenizer, 4,822 vocabulary mappings, token statistics, and 86,689 split sentences |
+| `data/processed/dataset_k20.joblib` | Joblib | 4.18 MB | Pre-built PyTorch sliding window tensors ($k=20$) for 500k train, 50k val, and 50k test pairs |
+| `saved_models/best_lstm.joblib` | Joblib | 16.4 MB | Champion LSTM (1 layer, 512 hidden units, 0.2 dropout) trained on 100k samples (**Test PP: 4.92, Acc: 66.73%**) |
+| `saved_models/best_rnn.joblib` | Joblib | 7.74 MB | Champion Simple RNN (2 layers, 256 hidden units, 0.2 dropout) trained on 100k samples (**Test PP: 5.38, Acc: 65.77%**) |
+
+### Loading Preprocessed Datasets in Python:
+```python
+import joblib
+
+# Load tokenizer and corpus metadata
+corpus_data = joblib.load("data/processed/preprocessed_corpus.joblib")
+tokenizer = corpus_data["tokenizer"]
+print(f"Vocabulary size: {corpus_data['vocab_size']:,}")
+
+# Load pre-built sliding window tensors
+dataset = joblib.load("data/processed/dataset_k20.joblib")
+train_X, train_y = dataset["train_X"], dataset["train_y"]
+print(f"Loaded {len(train_y):,} training window pairs!")
+```
+
+### Loading Pretrained Models for Inference:
+```python
+import joblib
+import torch
+from src.models.lstm import LSTMLM
+
+# Load checkpoint dictionary
+checkpoint = joblib.load("saved_models/best_lstm.joblib")
+model = LSTMLM(
+    vocab_size=checkpoint["vocab_size"],
+    embedding_dim=checkpoint["embedding_dim"],
+    hidden_dim=checkpoint["config"]["hidden"],
+    num_layers=checkpoint["config"]["layers"],
+    dropout=checkpoint["config"]["dropout"]
+)
+model.load_state_dict(checkpoint["state_dict"])
+model.eval()
+print(f"Loaded champion LSTM (Test Perplexity: {checkpoint['config']['test_ppl']})")
 ```
 
 ---
@@ -84,6 +134,10 @@ pip install -r requirements.txt
 
 ### 2. Execution Options
 - **Jupyter Notebook:** Open `notebooks/Assignment_02_Hamza_Khurram_i210735.ipynb` and run all cells.
+- **Run Full High-Performance Training on Local CPU (8-thread parallel):**
+  ```bash
+  python train_full.py
+  ```
 - **Pipeline Runner:**
   ```bash
   python main.py --quick     # Fast sanity-check mode
