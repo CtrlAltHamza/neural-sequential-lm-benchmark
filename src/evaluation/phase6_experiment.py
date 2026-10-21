@@ -147,13 +147,13 @@ def run_phase6_adaptation(
     print(f"Simple RNN:")
     print(f"  - Primary In-Domain Test Perplexity:  {primary_rnn_test_ppl:.2f}")
     print(f"  - BBC Out-of-Domain Test Perplexity:   {rnn_bbc_ppl:.2f}")
-    print(f"  - Absolute Generalization Gap (ΔPP):  +{delta_rnn_ppl:.2f}")
+    print(f"  - Absolute Generalization Gap (Delta PP):  +{delta_rnn_ppl:.2f}")
     print(f"  - Relative Perplexity Increase:       +{rel_rnn_gap:.1f}%\n")
 
     print(f"LSTM:")
     print(f"  - Primary In-Domain Test Perplexity:  {primary_lstm_test_ppl:.2f}")
     print(f"  - BBC Out-of-Domain Test Perplexity:   {lstm_bbc_ppl:.2f}")
-    print(f"  - Absolute Generalization Gap (ΔPP):  +{delta_lstm_ppl:.2f}")
+    print(f"  - Absolute Generalization Gap (Delta PP):  +{delta_lstm_ppl:.2f}")
     print(f"  - Relative Perplexity Increase:       +{rel_lstm_gap:.1f}%")
     print("=======================================================\n")
 

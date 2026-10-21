@@ -1,0 +1,38 @@
+{
+  "primary_rnn_test_ppl": 10.94,
+  "primary_lstm_test_ppl": 9.35,
+  "bbc_rnn_ppl": 196912.73,
+  "bbc_lstm_ppl": 164970.18,
+  "delta_rnn_ppl": 196901.79,
+  "delta_lstm_ppl": 164960.83,
+  "rel_rnn_gap_pct": 1799833.55,
+  "rel_lstm_gap_pct": 1764286.9,
+  "bbc_unk_rate_pct": 27.19,
+  "category_results": {
+    "business": {
+      "rnn_ppl": 196410.07,
+      "lstm_ppl": 157042.39,
+      "samples": 3000
+    },
+    "entertainment": {
+      "rnn_ppl": 191724.69,
+      "lstm_ppl": 108359.53,
+      "samples": 3000
+    },
+    "politics": {
+      "rnn_ppl": 191580.21,
+      "lstm_ppl": 148614.39,
+      "samples": 3000
+    },
+    "sport": {
+      "rnn_ppl": 214259.0,
+      "lstm_ppl": 182361.56,
+      "samples": 3000
+    },
+    "tech": {
+      "rnn_ppl": 200013.07,
+      "lstm_ppl": 169859.74,
+      "samples": 3000
+    }
+  }
+}

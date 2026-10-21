@@ -1,0 +1,17 @@
+{
+  "total_sentences": 86689,
+  "train_sentences": 69351,
+  "val_sentences": 8669,
+  "test_sentences": 8669,
+  "vocab_size": 4822,
+  "min_count": 3,
+  "train_tokens": 5083895,
+  "train_unk": 8651,
+  "train_unk_rate": 0.17016480474124662,
+  "val_tokens": 641468,
+  "val_unk": 1452,
+  "val_unk_rate": 0.2263557963920258,
+  "test_tokens": 635503,
+  "test_unk": 1424,
+  "test_unk_rate": 0.22407447329123542
+}
