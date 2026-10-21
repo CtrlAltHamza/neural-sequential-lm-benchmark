@@ -82,16 +82,8 @@ def run_demo():
 
     # 4. Interactive Next-Word Prediction Demo
     print("\n[4/4] AUTOREGRESSIVE TEXT GENERATION DEMONSTRATION:")
-    tokenizer = Tokenizer.load("data/processed/vocab.json")
-    model = LSTMLM(
-        vocab_size=lstm_ckpt["vocab_size"],
-        embedding_dim=lstm_ckpt["embedding_dim"],
-        hidden_dim=lstm_ckpt["config"]["hidden"],
-        num_layers=lstm_ckpt["config"]["layers"],
-        dropout=lstm_ckpt["config"]["dropout"]
-    )
-    model.load_state_dict(lstm_ckpt["state_dict"])
-    model.eval()
+    from src.models.chatbot import NextWordChatbot
+    bot = NextWordChatbot()
 
     prompts = [
         "it is a truth universally",
@@ -100,30 +92,9 @@ def run_demo():
     ]
 
     for seed in prompts:
-        tokens = tokenizer.sentence_to_tokens(seed)
-        k = 20
-        gen_tokens = []
-        curr_tokens = list(tokens)
-
-        with torch.no_grad():
-            for _ in range(8):
-                if len(curr_tokens) < k:
-                    seq = [0] * (k - len(curr_tokens)) + tokenizer.encode(curr_tokens)
-                else:
-                    seq = tokenizer.encode(curr_tokens[-k:])
-                
-                inp = torch.tensor([seq], dtype=torch.long)
-                logits = model(inp)
-                probs = torch.softmax(logits / 0.7, dim=-1)
-                pred_id = torch.multinomial(probs, num_samples=1).item()
-                word = tokenizer.idx2word.get(pred_id, "<UNK>")
-                if word == "</s>":
-                    break
-                gen_tokens.append(word)
-                curr_tokens.append(word)
-
+        formatted, gen_words = bot.generate_next_words(seed, n_words=10, mode="temperature", temperature=0.7)
         print(f"  Prompt: \"{seed}\"")
-        print(f"  --> Continuation: \"{' '.join(tokens + gen_tokens)}\"\n")
+        print(f"  --> Continuation: \"{formatted}\"\n")
 
     print("=" * 70)
     print("  LIVE DEMO COMPLETE! ALL CRITERIA VERIFIED.")

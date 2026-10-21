@@ -83,11 +83,21 @@ class NextWordChatbot:
                 inp_tensor = torch.tensor([inp], dtype=torch.long, device=self.device)
                 logits = self.model(inp_tensor)[0]  # (vocab_size,)
 
-                # Mask PAD and UNK tokens during generation
+                # Mask special tokens so they are never generated into text
                 logits[self.tokenizer.pad_id] = -1e9
                 logits[self.tokenizer.unk_id] = -1e9
+                logits[self.tokenizer.bos_id] = -1e9
+
+                # If user requested more words, mask premature EOS
+                if len(generated_words) < n_words - 1:
+                    logits[self.tokenizer.eos_id] = -1e9
 
                 if mode.lower() == "greedy":
+                    # Mild repetition penalty on recent tokens to prevent deterministic loops
+                    for prev_w in set(generated_words[-4:]):
+                        prev_id = self.tokenizer.word2idx.get(prev_w)
+                        if prev_id is not None:
+                            logits[prev_id] -= 1.8
                     next_token_id = torch.argmax(logits).item()
                 else:
                     temp = max(float(temperature), 1e-4)
@@ -97,16 +107,24 @@ class NextWordChatbot:
 
                 next_word = self.tokenizer.idx2word.get(next_token_id, "")
                 if next_word == "</s>":
-                    # Sentence finished naturally
-                    generated_words.append(".")
-                    break
+                    if generated_words and generated_words[-1] not in ".!?":
+                        generated_words.append(".")
+                    # Reset context to start of sentence so generation continues
+                    current_tokens = ["<s>"]
+                    continue
 
                 generated_words.append(next_word)
                 current_tokens.append(next_word)
 
-        # Format readable string
-        full_text = seed_phrase.strip() + " " + " ".join(generated_words)
-        return full_text, generated_words
+        # Clean detokenization and typography formatting
+        import re
+        full_tokens = list(raw_words) + generated_words
+        formatted_text = " ".join(full_tokens)
+        formatted_text = re.sub(r"\s+([.,!?;:])", r"\1", formatted_text)
+        formatted_text = re.sub(r"\s+'\s*", "'", formatted_text)
+        formatted_text = re.sub(r"\.{2,}", ".", formatted_text)
+
+        return formatted_text, generated_words
 
     def interactive_loop(self):
         """Runs the interactive console loop."""
