@@ -173,3 +173,10 @@ class Tokenizer:
         tok.word_counts = data.get("word_counts", {})
         tok.is_fitted = True
         return tok
+
+if __name__ == "__main__":
+    t = Tokenizer(min_count=2)
+    sents = ["It is a truth universally acknowledged.", "Truth is precious."]
+    t.fit_on_sentences(sents)
+    enc = t.encode(t.sentence_to_tokens("It is a rare truth."))
+    print(f"[TEST] Tokenizer verified successfully. Vocab size: {t.vocab_size}, Encoded tokens: {len(enc)}")

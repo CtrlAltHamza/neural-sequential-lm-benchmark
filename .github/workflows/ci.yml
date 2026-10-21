@@ -27,6 +27,7 @@ jobs:
 
       - name: Verify Environment & Imports
         run: |
+          python -c "import nltk; nltk.download('punkt', quiet=True); nltk.download('punkt_tab', quiet=True)"
           python -c "import torch, numpy, pandas, scipy, sklearn, matplotlib, seaborn, nltk, reportlab; print('All core libraries verified!')"
 
       - name: Run Pipeline Quick Verification
