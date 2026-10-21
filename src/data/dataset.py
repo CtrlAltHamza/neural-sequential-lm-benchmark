@@ -10,9 +10,15 @@ Handles:
 4. PyTorch Dataset and DataLoader generation with variable window size k.
 """
 
+import sys
 import json
 from pathlib import Path
 from typing import List, Tuple, Dict, Optional
+
+# Ensure project root is in sys.path when run directly
+root_dir = Path(__file__).resolve().parent.parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
 
 import pandas as pd
 import torch

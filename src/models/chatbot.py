@@ -9,7 +9,14 @@ Features:
 3. Robust input() loop with quit command and crash-proof error handling.
 """
 
+import sys
 from pathlib import Path
+
+# Ensure project root is in sys.path when run directly
+root_dir = Path(__file__).resolve().parent.parent.parent
+if str(root_dir) not in sys.path:
+    sys.path.insert(0, str(root_dir))
+
 from typing import List, Tuple, Optional
 import torch
 import torch.nn.functional as F
