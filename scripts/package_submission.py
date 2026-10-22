@@ -32,6 +32,8 @@ def package_submission(zip_filename="i210735_Hamza_Khurram_A2.zip"):
         "configs",
         "notebooks",
         "src",
+        "scripts",
+        "data/processed",
         "saved_models",
         "experiments",
         "reports"

@@ -71,7 +71,11 @@ Option B: Run via Command-Line Pipeline (main.py)
   3. Run on GPU (if CUDA available):
        python main.py --device cuda
 
-Option C: Run in Google Colab / Kaggle
+Option C: Run Live Teacher Demonstration (scripts/demo.py)
+  Instant out-of-the-box demonstration of dataset requirements, joblib models, and text generation:
+       python scripts/demo.py
+
+Option D: Run in Google Colab / Kaggle
   1. Upload the project folder or clone the repository to Colab.
   2. Open notebooks/Assignment_02_Hamza_Khurram_i210735.ipynb.
   3. Ensure GPU runtime is selected (Runtime -> Change runtime type -> T4 GPU).

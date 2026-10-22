@@ -1,37 +1,37 @@
 {
-  "primary_rnn_test_ppl": 142.25,
-  "primary_lstm_test_ppl": 134.25,
-  "bbc_rnn_ppl": 204.28,
-  "bbc_lstm_ppl": 214.55,
-  "delta_rnn_ppl": 62.03,
-  "delta_lstm_ppl": 80.3,
-  "rel_rnn_gap_pct": 43.61,
-  "rel_lstm_gap_pct": 59.81,
+  "primary_rnn_test_ppl": 161.94,
+  "primary_lstm_test_ppl": 152.97,
+  "bbc_rnn_ppl": 239.9,
+  "bbc_lstm_ppl": 245.87,
+  "delta_rnn_ppl": 77.96,
+  "delta_lstm_ppl": 92.9,
+  "rel_rnn_gap_pct": 48.14,
+  "rel_lstm_gap_pct": 60.73,
   "bbc_unk_rate_pct": 17.62,
   "category_results": {
     "business": {
-      "rnn_ppl": 214.84,
-      "lstm_ppl": 223.58,
+      "rnn_ppl": 255.93,
+      "lstm_ppl": 256.9,
       "samples": 3000
     },
     "entertainment": {
-      "rnn_ppl": 160.87,
-      "lstm_ppl": 164.46,
+      "rnn_ppl": 197.09,
+      "lstm_ppl": 195.67,
       "samples": 3000
     },
     "politics": {
-      "rnn_ppl": 204.05,
-      "lstm_ppl": 203.53,
+      "rnn_ppl": 229.06,
+      "lstm_ppl": 223.7,
       "samples": 3000
     },
     "sport": {
-      "rnn_ppl": 162.19,
-      "lstm_ppl": 166.62,
+      "rnn_ppl": 182.45,
+      "lstm_ppl": 186.48,
       "samples": 3000
     },
     "tech": {
-      "rnn_ppl": 151.99,
-      "lstm_ppl": 158.5,
+      "rnn_ppl": 174.33,
+      "lstm_ppl": 176.46,
       "samples": 3000
     }
   }
