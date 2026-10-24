@@ -23,7 +23,7 @@ if str(root_dir) not in sys.path:
 import pandas as pd
 import torch
 from torch.utils.data import Dataset, DataLoader
-from sklearn.model_selection import train_test_split
+from src.utils.ml_utils import train_test_split
 from nltk.tokenize import sent_tokenize
 
 from src.data.tokenizer import Tokenizer, PAD_TOKEN, UNK_TOKEN, BOS_TOKEN, EOS_TOKEN
