@@ -1,9 +1,6 @@
 # Experimental Analysis of RNNs and LSTMs for Next Word Prediction
 
-**Course:** CS4045 – Deep Learning for Perception  
-**Instructor:** Dr. Ahmad Raza Shahid  
-**Author:** Hamza Khurram (`i210735`)  
-**Assignment:** #2  
+
 
 ---
 
