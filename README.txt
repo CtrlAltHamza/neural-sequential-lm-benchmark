@@ -2,10 +2,6 @@
 DEEP LEARNING FOR PERCEPTION (CS4045) - ASSIGNMENT #2
 Analysis of RNNs and LSTMs for Next Word Prediction
 ================================================================================
-Student Name: Hamza Khurram
-Roll Number:  i210735
-Instructor:   Dr. Ahmad Raza Shahid
-Due Date:     Fall 2026
 
 --------------------------------------------------------------------------------
 1. PROJECT STRUCTURE
