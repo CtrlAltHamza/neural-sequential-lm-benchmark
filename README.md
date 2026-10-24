@@ -131,11 +131,7 @@ source .venv/bin/activate  # On Windows: .\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Execution Options
-- **Live Teacher Demonstration (Instant Out-of-the-Box Check):**
-  ```bash
-  python scripts/demo.py
-  ```
+
 - **Interactive Chatbot (Phase 4):**
   ```bash
   python src/models/chatbot.py
